@@ -9,13 +9,18 @@ const analysisRoutes = require("./routes/analysisRoutes");
 
 dotenv.config();
 
-console.log("Groq Key:", process.env.GROQ_API_KEY);
-
 connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://resume-forge-frontend-taupe.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 
@@ -24,7 +29,7 @@ app.use("/api/test", testRoutes);
 app.use("/api/analysis", analysisRoutes);
 
 app.get("/test-ai", async (req, res) => {
-    console.log(process.env.GEMINI_API_KEY);
+  
   try {
     const analyzeResume = require("./services/geminiServices");
 
