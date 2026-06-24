@@ -19,8 +19,8 @@ const uploadResume = async (req, res) => {
       });
     }
 
-    const extractedText =
-      await extractTextFromPDF(req.file.path);
+   const extractedText =
+  await extractTextFromPDF(req.file.buffer);
 
     const analysis =
       await analyzeResume(extractedText);
